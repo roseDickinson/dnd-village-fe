@@ -3,43 +3,86 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "nuxt",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "start": "nuxt start",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
-    "core-js": "^3.6.5",
+    "@nuxtjs/eslint-config": "^6.0.1",
+    "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/vuetify": "^1.12.1",
     "nuxt": "^2.15.8",
-    "vue": "^2.6.11",
-    "vuetify": "^2.4.0"
+    "vue": "^2.6.12"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "sass": "~1.32.0",
-    "sass-loader": "^10.0.0",
-    "vue-cli-plugin-vuetify": "~2.4.2",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.7.0"
+    "@babel/core": "^7.12.10",
+    "@babel/eslint-parser": "^7.12.10",
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
+    "@vue/cli-service": "~4.5.13",
+    "babel-core": "^7.0.0-bridge.0",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-standard": "^16.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "3.0.0",
+    "eslint-plugin-promise": ">=4.2.1",
+    "eslint-plugin-vue": "^7.0.0",
+    "eslint-webpack-plugin": "^2.5.2",
+    "prettier": "^2.2.1",
+    "sass": "~1.32.13",
+    "webpack": "^4.46.0"
   },
   "eslintConfig": {
     "root": true,
     "env": {
+      "browser": true,
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+      "@nuxtjs",
+      "eslint:recommended",
+      "plugin:vue/recommended",
+      "plugin:prettier/recommended",
+      "eslint-config-prettier",
+      "prettier",
+      "prettier/vue"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto",
+          "arrowParens": "avoid"
+        }
+      ],
+      "arrow-parens": [
+        0,
+        "as-needed"
+      ],
+      "no-console": 0,
+      "sort-imports": [
+        1,
+        {
+          "ignoreCase": true,
+          "ignoreDeclarationSort": false,
+          "ignoreMemberSort": false,
+          "memberSyntaxSortOrder": [
+            "none",
+            "all",
+            "multiple",
+            "single"
+          ]
+        }
+      ],
+      "import/order": 0
+    }
   },
   "browserslist": [
     "> 1%",

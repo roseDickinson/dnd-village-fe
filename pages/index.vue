@@ -10,7 +10,7 @@
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
-          src="./assets/logo.png"
+          src="~/assets/logo.png"
           transition="scale-transition"
           width="40"
         />
@@ -19,18 +19,17 @@
         DnD Location Visualisation
       </span>
 
-      <v-spacer></v-spacer>
-
+      <v-spacer />
     </v-app-bar>
 
     <v-main>
-      <LocationsTable/>
+      <LocationsTable />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import LocationsTable from './components/LocationsTable';
+import LocationsTable from '~/components/LocationsTable';
 
 export default {
   name: 'App',
@@ -38,7 +37,7 @@ export default {
     LocationsTable,
   },
   data: () => ({
-    //
+    // 
   }),
 };
 </script>
