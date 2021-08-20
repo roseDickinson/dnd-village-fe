@@ -6,8 +6,7 @@
     "serve": "nuxt",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "start": "nuxt start",
-    "lint": "vue-cli-service lint"
+    "start": "nuxt start"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
@@ -15,74 +14,25 @@
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/vuetify": "^1.12.1",
     "nuxt": "^2.15.8",
-    "vue": "^2.6.12"
+    "vue": "^2.6.14"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/eslint-parser": "^7.12.10",
-    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
-    "@vue/cli-service": "~4.5.13",
+    "@babel/core": "^7.15.0",
+    "@babel/eslint-parser": "^7.15.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.15.0",
     "babel-core": "^7.0.0-bridge.0",
-    "eslint": "^7.2.0",
-    "eslint-config-prettier": "^7.2.0",
-    "eslint-config-standard": "^16.0.0",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "3.0.0",
-    "eslint-plugin-promise": ">=4.2.1",
-    "eslint-plugin-vue": "^7.0.0",
-    "eslint-webpack-plugin": "^2.5.2",
-    "prettier": "^2.2.1",
-    "sass": "~1.32.13",
+    "eslint-plugin-prettier": "3.4.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-vue": "^7.16.0",
+    "eslint-webpack-plugin": "^2.5.4",
+    "prettier": "^2.3.2",
+    "sass": "~1.38.0",
     "webpack": "^4.46.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "browser": true,
-      "node": true
-    },
-    "extends": [
-      "@nuxtjs",
-      "eslint:recommended",
-      "plugin:vue/recommended",
-      "plugin:prettier/recommended",
-      "eslint-config-prettier",
-      "prettier",
-      "prettier/vue"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "endOfLine": "auto",
-          "arrowParens": "avoid"
-        }
-      ],
-      "arrow-parens": [
-        0,
-        "as-needed"
-      ],
-      "no-console": 0,
-      "sort-imports": [
-        1,
-        {
-          "ignoreCase": true,
-          "ignoreDeclarationSort": false,
-          "ignoreMemberSort": false,
-          "memberSyntaxSortOrder": [
-            "none",
-            "all",
-            "multiple",
-            "single"
-          ]
-        }
-      ],
-      "import/order": 0
-    }
   },
   "browserslist": [
     "> 1%",

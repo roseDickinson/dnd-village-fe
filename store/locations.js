@@ -1,18 +1,18 @@
-import listLocations from '~/api/locations'
+import locationsApi from "~/api/locations";
 
 export const state = () => ({
-  locations: []
-})
+  locations: [],
+});
 
 export const mutations = {
   setLocations: (state, l) => {
-    state.locations = l
-  }
-}
+    state.locations = l;
+  },
+};
 
 export const actions = {
-  async getLocations({commit}) {
-    let response = await listLocations()
-    commit('setLocations', response.data)
-  }
-}
+  async getLocations({ commit }) {
+    const response = await locationsApi.listLocations();
+    commit("setLocations", response.data);
+  },
+};
