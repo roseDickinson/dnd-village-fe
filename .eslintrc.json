@@ -5,11 +5,15 @@
     "node": true
   },
   "parserOptions": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   },
   "extends": [
+    "@nuxtjs",
     "eslint:recommended",
-    "plugin:vue/recommended"
+    "plugin:vue/recommended",
+    "plugin:prettier/recommended",
+    "eslint-config-prettier",
+    "prettier"
   ],
   "plugins": [
     "vue"
@@ -46,6 +50,7 @@
         "switchCase": 0,
         "ignores": []
       }
-    ]
+    ],
+    "import/order": "off"
   }
 }
