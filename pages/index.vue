@@ -1,43 +1,37 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          :src="require('~/assets/logo.png')"
-          transition="scale-transition"
-          width="40"
-        />
-      </div>
-      <span>
-        DnD Location Visualisation
-      </span>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <BreadCrumb :breadcrumb-list="breadcrumbList" />
+      </v-col>
+      <v-col class="pb-0">
+        <h1 class="display-2 font-weight-bold mb-3">Locations</h1>
+      </v-col>
 
-      <v-spacer />
-    </v-app-bar>
-
-    <v-main>
-      <LocationsTable />
-    </v-main>
-  </v-app>
+      <v-col class="mb-5" cols="12">
+        <LocationsTable />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import LocationsTable from '~/components/LocationsTable';
+import BreadCrumb from "~/components/BreadCrumb";
+import LocationsTable from "~/components/LocationsTable";
 
 export default {
-  name: 'App',
+  name: "HomePage",
   components: {
+    BreadCrumb,
     LocationsTable,
   },
   data: () => ({
-    // 
+    breadcrumbList: [
+      {
+        text: "Home",
+        disabled: true,
+      },
+    ],
   }),
 };
 </script>

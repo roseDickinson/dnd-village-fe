@@ -22,5 +22,7 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-
 .nuxt
+
+api/auth.js
+.eslintcache

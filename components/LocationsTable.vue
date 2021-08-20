@@ -1,42 +1,54 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Locations
-        </h1>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
+  <v-data-table
+    :items="locations"
+    :headers="locationHeaders"
+    style="border: thin solid rgba(0, 0, 0, 0.12)"
+  >
+    <template #item.name="{ item }">
+      <nuxt-link
+        :to="{
+          name: 'LocationVisualisation',
+          query: {
+            id: item.id,
+          },
+        }"
       >
-        <v-data-table :items="locations" />
-      </v-col>
-    </v-row>
-  </v-container>
+        {{ item.name }}
+      </nuxt-link>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState } from "vuex";
 
 export default {
-  name: 'LocationsTable',
+  name: "LocationsTable",
 
   data: () => ({
+    locationHeaders: [
+      {
+        text: "Name",
+        value: "name",
+      },
+      {
+        text: "Type",
+        value: "location_type",
+      },
+    ],
   }),
   computed: {
     ...mapState({
-      locations: state => state.locations.locations
-    })
+      locations: (state) => state.locations.locations,
+    }),
   },
   mounted() {
-    this.getLocations()
+    this.getLocations();
   },
   methods: {
     ...mapActions({
-      getLocations: 'locations/getLocations'
-    })
-  }
-}
+      getLocations: "locations/getLocations",
+    }),
+  },
+};
 </script>
