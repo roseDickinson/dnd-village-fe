@@ -3,7 +3,24 @@ import locationsApi from "~/api/locations";
 export const state = () => ({
   locations: [],
   activeLocation: {},
+  selectedPerson: null,
 });
+
+export const getters = {
+  getPeople: (state) => {
+    return state.activeLocation.people;
+  },
+  getSelectedPerson: (state) => {
+    return (
+      (state.activeLocation.people &&
+        state.activeLocation.people.find(
+          // eslint-disable-next-line
+          (p) => p.id == state.selectedPerson
+        )) ||
+      {}
+    );
+  },
+};
 
 export const mutations = {
   setLocations: (state, l) => {
@@ -11,6 +28,9 @@ export const mutations = {
   },
   setActiveLocation: (state, al) => {
     state.activeLocation = al;
+  },
+  setSelectedPerson: (state, sp) => {
+    state.selectedPerson = sp;
   },
 };
 

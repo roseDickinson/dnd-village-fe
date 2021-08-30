@@ -10,23 +10,47 @@
         </h1>
       </v-col>
 
-      <v-col class="mb-5" cols="12">
-        <div id="NetworkGraph" />
+      <v-col cols="12">
+        <div
+          id="NetworkGraph"
+          style="border: 1px #0000001f solid; background-color: #fff"
+        />
       </v-col>
 
-      <v-col class="mb-5" cols="12">
-        <v-data-table
-          :items="activeLocation.people"
-          :headers="peopleHeaders"
-          style="border: thin solid rgba(0, 0, 0, 0.12)"
-        >
-        </v-data-table>
+      <v-col v-show="selectedPerson !== null" class="mb-5 pt-0" cols="12">
+        <v-card outlined>
+          <v-card-title> {{ getSelectedPerson.name }} </v-card-title>
+          <v-card-text>
+            <span>
+              Race:
+              <span style="color: black">{{ getSelectedPerson.race }} </span
+              ><br />
+              Age:
+              <span style="color: black">{{ getSelectedPerson.age }} </span
+              ><br />
+              Gender:
+              <span style="color: black">{{ getSelectedPerson.gender }} </span
+              ><br />
+              Sexuality:
+              <span style="color: black"
+                >{{ getSelectedPerson.sexuality }} </span
+              ><br />
+              Profession:
+              <span style="color: black"
+                >{{ getSelectedPerson.profession }} </span
+              ><br />
+              Status:
+              <span style="color: black">{{ getSelectedPerson.status }} </span
+              ><br />
+            </span>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 import BreadCrumb from "~/components/BreadCrumb";
 
 export default {
@@ -73,6 +97,10 @@ export default {
   computed: {
     ...mapState({
       activeLocation: (state) => state.locations.activeLocation,
+      selectedPerson: (state) => state.locations.selectedPerson,
+    }),
+    ...mapGetters({
+      getSelectedPerson: "locations/getSelectedPerson",
     }),
   },
   async mounted() {
@@ -84,6 +112,9 @@ export default {
   methods: {
     ...mapActions({
       getLocationById: "locations/getLocationById",
+    }),
+    ...mapMutations({
+      setSelectedPerson: "locations/setSelectedPerson",
     }),
     drag(simulation) {
       function dragstarted(event, d) {
@@ -106,6 +137,16 @@ export default {
         .on("start", dragstarted)
         .on("drag", dragged)
         .on("end", dragended);
+    },
+    clickStarted(event, clickedNode) {
+      console.log("started", event);
+      console.log(clickedNode);
+      this.setSelectedPerson(clickedNode.id);
+    },
+    clickEnd(event, d) {
+      event.append("circle").attr("fill", "black");
+      console.log("ended", event);
+      console.log(d);
     },
     generateNetworkGraph() {
       const width = 800;
@@ -150,8 +191,9 @@ export default {
         .data(nodes)
         .join("circle")
         .attr("r", 5)
-        .attr("fill", "black")
-        .call(this.drag(simulation));
+        .attr("fill", (n) => n.color)
+        .call(this.drag(simulation))
+        .on("click", this.clickStarted);
 
       node.append("title").text((d) => d.id);
 
