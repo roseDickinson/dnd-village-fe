@@ -1,27 +1,30 @@
 <template>
-  <v-container>
+  <v-container style="max-width: 1500px">
     <v-row>
       <v-col cols="12">
         <BreadCrumb :breadcrumb-list="breadcrumbList" />
       </v-col>
-      <v-col class="pb-0">
+      <v-col class="pb-0" cols="12">
         <h1 class="display-2 font-weight-bold mb-3">
           {{ activeLocation.name }}
         </h1>
       </v-col>
 
-      <v-col cols="12">
+      <v-col cols="10">
         <div
           id="NetworkGraph"
           style="border: 1px #0000001f solid; background-color: #fff"
         />
       </v-col>
 
-      <v-col v-show="selectedPerson !== null" class="mb-5 pt-0" cols="12">
+      <v-col v-show="selectedPerson !== null" class="mb-5" cols="2">
         <v-card outlined>
           <v-card-title> {{ getSelectedPerson.name }} </v-card-title>
           <v-card-text>
             <span>
+              Id:
+              <span style="color: black">{{ getSelectedPerson.id }} </span
+              ><br />
               Race:
               <span style="color: black">{{ getSelectedPerson.race }} </span
               ><br />
@@ -41,6 +44,10 @@
               ><br />
               Status:
               <span style="color: black">{{ getSelectedPerson.status }} </span
+              ><br />
+              Extra info:
+              <span style="color: black"
+                >{{ getSelectedPerson.extra_info }} </span
               ><br />
             </span>
           </v-card-text>
@@ -93,6 +100,7 @@ export default {
       },
     ],
     d3: null,
+    nodeRadius: 5,
   }),
   computed: {
     ...mapState({
@@ -150,7 +158,7 @@ export default {
     },
     generateNetworkGraph() {
       const width = 800;
-      const height = 500;
+      const height = 600;
       const data = JSON.parse(JSON.stringify(this.activeLocation.graph_data));
       const links = data.links;
       const nodes = data.nodes;
@@ -164,7 +172,7 @@ export default {
             .id((d) => d.id)
             .distance((d) => d.value)
         )
-        .force("charge", this.d3.forceManyBody())
+        .force("charge", this.d3.forceManyBody().strength(-110))
         .force("x", this.d3.forceX())
         .force("y", this.d3.forceY());
 
@@ -190,10 +198,28 @@ export default {
         .selectAll("circle")
         .data(nodes)
         .join("circle")
-        .attr("r", 5)
+        .attr("r", this.nodeRadius)
         .attr("fill", (n) => n.color)
         .call(this.drag(simulation))
         .on("click", this.clickStarted);
+
+      const label = svg
+        .append("g")
+        .attr("stroke-width", 1.5)
+        .selectAll(".mytext")
+        .data(nodes)
+        .enter()
+        .append("text")
+        .text((d) => d.name.split(" ")[0])
+        .style("text-anchor", "middle")
+        .style("fill", "#555")
+        .style("font-family", "Arial")
+        .style("paint-order", "stroke")
+        .style("stroke", "#fff")
+        .style("stroke-width", "2px")
+        .style("stroke-linecap", "butt")
+        .style("stroke-linejoin", "miter")
+        .style("font-size", 10);
 
       node.append("title").text((d) => d.id);
 
@@ -204,6 +230,9 @@ export default {
           .attr("x2", (d) => d.target.x)
           .attr("y2", (d) => d.target.y);
         node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+        label
+          .attr("x", (d) => d.x)
+          .attr("y", (d) => d.y - (this.nodeRadius + 1));
       });
     },
   },
