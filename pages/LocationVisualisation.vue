@@ -45,6 +45,27 @@
               Status:
               <span style="color: black">{{ getSelectedPerson.status }} </span
               ><br />
+              Parents:
+              <span
+                v-for="parent in getSelectedPerson.parents"
+                :key="parent.id"
+                style="color: black"
+                >{{ parent.name }}, </span
+              ><br />
+              Siblings:
+              <span
+                v-for="sibling in getSelectedPerson.siblings"
+                :key="sibling.id"
+                style="color: black"
+                >{{ sibling.name }}, </span
+              ><br />
+              Partners:
+              <span
+                v-for="partner in getSelectedPerson.partners"
+                :key="partner.id"
+                style="color: black"
+                >{{ partner.name }}, </span
+              ><br />
               Extra info:
               <span style="color: black"
                 >{{ getSelectedPerson.extra_info }} </span
